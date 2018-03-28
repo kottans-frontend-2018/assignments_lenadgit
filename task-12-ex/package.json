@@ -1,0 +1,13 @@
+{
+"name": "index",
+"version": "0.0.1",
+"description": "Pizza App",
+"main": "index.html",
+"repository": "",
+"author": "",
+"license": "MIT",
+"private": false,
+"scripts": {
+	"push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
+}
+}
