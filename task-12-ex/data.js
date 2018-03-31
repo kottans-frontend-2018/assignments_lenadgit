@@ -20,7 +20,7 @@ class Data {
 
 var getData = function() {
 let url = 'https://pizza-tele.ga/api/v1/store/list';
-console.log(url);
+//console.log(url);
  let j = fetch(url, {method: 'get'})
 
 	.then(response => {
@@ -32,14 +32,12 @@ console.log(url);
 })
 	.then(data => {
 		console.log(data);
-		document.querySelector('.data-class').innerHTML = "<option>' + data[i] + '</option>";
+		document.querySelector('.data-class').innerHTML = '';
+		for(let i=0; i<=data.length; i++){
+		document.querySelector('.data-class').innerHTML += "<option>" + data[i].name + "</option>";
+	}
 
 });
-
-
-	
-	console.log(data);
-	//console.log('https://pizza-tele.ga/api/v1/store/list');
   
 }
     var getstores = document.querySelector('.input-login-wrapper');
