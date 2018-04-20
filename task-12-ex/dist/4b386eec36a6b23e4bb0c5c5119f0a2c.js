@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({10:[function(require,module,exports) {
+})({19:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -98,7 +98,7 @@ var App = function () {
 }();
 
 exports.default = App;
-},{}],11:[function(require,module,exports) {
+},{}],9:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -125,8 +125,48 @@ var Login = function () {
 		value: function render() {
 			var showLogin = function showLogin() {
 				document.querySelector('.input-login-wrapper').style.display = 'block';
-				document.querySelector('.input-login-wrapper').innerHTML = '\n\t<div class = \'cross\'>x</div>\n\t<h3 class = \'h3\'>Log In</h3>\n\t        <input type = \'text\' value = \'login\' class = \'input-login\'>\n\t\t\t<input type = \'password\' value = \'\' class = \'input-login\'>\n\t\t\t<input type = \'submit\' value = \'Sign In\' class = \'login-sbm\'> \n\t\t\t<p>Have not an account?</p><div class = \'register-redirect\'>Register acc</div>\n\t';
-				console.log(login);
+				document.querySelector('.input-login-wrapper').innerHTML = '\n\t<div class = \'cross\'>x</div>\n\t<h3 class = \'h3\'>Log In</h3>\n\t        <input type = \'text\' value = \'\' class = \'input-login\' id = \'username\'>\n\t\t\t<input type = \'password\' value = \'\' class = \'input-login\' id = \'pass\'>\n\t\t\t<input type = \'submit\' value = \'Sign In\' class = \'login-sbm\'> \n\t\t\t<div class = "login-error"></div>\n\t\t\t<p>Have not an account?</p><div class = \'register-redirect\'>Register acc</div>\n\t';
+
+				var logel = document.querySelector('.login-sbm');
+
+				logel.onclick = function () {
+					var user = document.getElementById('username').value;
+					var password = document.getElementById('pass').value;
+					//let password_repeat = document.getElementById('pas-rep').value;
+					//let email = document.getElementById('em').value;
+					//let store_id = 13;
+					//let store_password = document.getElementById('storepass').value;
+
+					var payload = {
+						method: 'post',
+						headers: {
+							'Accept': 'application/json'
+							// 'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({
+							username: user,
+							password: password,
+							//password_repeat : password_repeat,
+							//email : email,
+							store_id: 13
+							//store_password : store_password
+						})
+					};
+					console.log('Payload: ', payload);
+					fetch('https://pizza-tele.ga/api/v1/user/login', payload).then(function (res) {
+						return res.json();
+					}).then(function (res) {
+						console.log('Login result', res);
+						if (res.success === true) {
+							localStorage.setItem('token', res.token);
+							//localStorage.getItem('token');
+						} else {
+							document.querySelector('.login-error').innerHTML = '<p>' + res.error + (res.validations ? res.validations : '') + '</p>';
+						}
+					});
+				};
+
+				console.log('login');
 			};
 
 			var clkLogin = document.querySelector('#login-btn');
@@ -138,7 +178,62 @@ var Login = function () {
 }();
 
 exports.default = Login;
-},{"./App":10}],12:[function(require,module,exports) {
+},{"./App":19}],12:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+		value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _App = require('./App');
+
+var _App2 = _interopRequireDefault(_App);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var sData = function () {
+		function sData() {
+				_classCallCheck(this, sData);
+		}
+
+		_createClass(sData, [{
+				key: 'render',
+				value: function render() {
+						var sendData = function sendData() {
+								fetch('https://pizza-tele.ga/api/v1/user/create', {
+										method: 'post',
+										headers: {
+												'Accept': 'application/json, text/plain, /',
+												'Content-Type': 'application/json'
+										},
+										body: JSON.stringify({ username: user,
+												password: password,
+												password_repeat: repeat_password,
+												email: email,
+												//store_id : 8,
+												store_password: store_password
+										})
+								}).then(function (res) {
+										return res.json();
+								}).then(function (res) {
+										return console.log(res);
+								});
+						};
+
+						var senddata = document.querySelector('.add-btn');
+						senddata.addEventListener('click', sendData, false);
+				}
+		}]);
+
+		return sData;
+}();
+
+exports.default = sData;
+},{"./App":19}],10:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -150,6 +245,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _App = require('./App');
 
 var _App2 = _interopRequireDefault(_App);
+
+var _sdata = require('./sdata.js');
+
+var _sdata2 = _interopRequireDefault(_sdata);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -165,9 +264,45 @@ var Signin = function () {
 		value: function render() {
 			var showSignin = function showSignin() {
 				document.querySelector('.input-login-wrapper').style.display = 'block';
-				document.querySelector('.input-login-wrapper').innerHTML = '\n\t<div class = \'cross\'>x</div>\n\t<h3 class = \'h3\'>Sign Up</h3>\n\t        <label class = \'label\'>Name</lebel>\n\t        <input type = \'text\' value = \'login\' class = \'input-login\'>\n\t        <label class = \'label\'>Email</lebel>\n\t        <input type = \'text\' value = \'email\' class = \'input-login\'>\n\t        <label class = \'label\'>Password</lebel>\n\t\t\t<input type = \'password\' value = \'\' class = \'input-login\'>\n\t\t\t<label class = \'label\'>Confirm password</lebel>\n\t\t\t<input type = \'password\' value = \'\' class = \'input-login\'>\n\t\t\t<input type = \'submit\' value = \'Register\' class = \'login-sbm\'>\n\t\t\t<p>Already have you an account?</p><div class = \'login-redirect\'>Log in</div> \n\t';
-				console.log(66);
+				document.querySelector('.input-login-wrapper').innerHTML = '\n\t<div class = \'cross\'>x</div>\n\t<h3 class = \'h3\'>Sign Up</h3>\n\t        <label class = \'label\'>Select Store</lebel>\n\t        <select class = \'data-class\'>\n\t        <option></option>\n\t        </select>\n\t        <label class = \'label\'>Name</lebel>\n\t        <input type = \'text\' value = \'login\' class = \'input-login\' id=\'username\'>\n\t        <label class = \'label\'>Email</lebel>\n\t        <input type = \'text\' value = \'email\' class = \'input-login\' id = \'em\'>\n\t        <label class = \'label\'>Password</lebel>\n\t\t\t<input type = \'password\' value = \'\' class = \'input-login\' id = \'pass\'>\n\t\t\t<label class = \'label\'>Confirm password</label>\n\t\t\t<input type = \'password\' value = \'\' class = \'input-login\' id = \'pas-rep\'>\n\t\t\t<input type = \'password\' value = \'\' class = \'input-login\' id = \'storepass\'>\n\n<br>\n\t\t\t<input type = \'submit\' value = \'Register\' class = \'login-sbm\' id=\'btn-reg\'>\n\t\t\t<p>Already have you an account?</p><div class = \'login-redirect\'>Log in</div> \n\t';
+
+				var el = document.getElementById('btn-reg');
+
+				el.onclick = function () {
+					var user = document.getElementById('username').value;
+					var password = document.getElementById('pass').value;
+					var password_repeat = document.getElementById('pas-rep').value;
+					var email = document.getElementById('em').value;
+					//let store_id = 13;
+					var store_password = document.getElementById('storepass').value;
+
+					var payload = {
+						method: 'post',
+						headers: {
+							'Accept': 'application/json'
+							// 'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({
+							username: user,
+							password: password,
+							password_repeat: password_repeat,
+							email: email,
+							store_id: 13,
+							store_password: store_password
+						})
+					};
+					console.log('Payload: ', payload);
+					fetch('https://pizza-tele.ga/api/v1/user/create', payload).then(function (res) {
+						return res.json();
+					}).then(function (res) {
+						return console.log(res);
+					});
+				};
 			};
+
+			//console.log(username);
+			console.log('register');
+			//}
 
 			var clkSignin = document.querySelector('#signup-btn');
 			clkSignin.addEventListener('click', showSignin, false);
@@ -178,7 +313,7 @@ var Signin = function () {
 }();
 
 exports.default = Signin;
-},{"./App":10}],13:[function(require,module,exports) {
+},{"./App":19,"./sdata.js":12}],11:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -195,18 +330,123 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var RedirectLogin = function () {
-	function RedirectLogin() {
-		_classCallCheck(this, RedirectLogin);
+var Data = function () {
+	function Data() {
+		_classCallCheck(this, Data);
 	}
 
-	_createClass(RedirectLogin, [{
+	_createClass(Data, [{
+		key: 'render',
+		value: function render() {
+			//var hideForm = function(hide) {
+
+			//document.querySelector('.input-login-wrapper').style.display = 'none';
+			//hide.stopPropagation();
+			//}
+			//var clkBodyLogin = document.querySelector('.input-login-wrapper');
+			//clkBodyLogin.addEventListener('click', hideForm, false);
+			//}
+			//}
+
+
+			var getData = function getData() {
+				var url = 'https://pizza-tele.ga/api/v1/store/list';
+				//console.log(url);
+				var j = fetch(url, { method: 'get' }).then(function (response) {
+					if (response.ok) {
+						return response.json();
+					} else {
+						throw 'server error';
+					}
+				}).then(function (data) {
+					console.log(data);
+					document.querySelector('.data-class').innerHTML = '';
+					for (var i = 0; i <= data.length; i++) {
+						document.querySelector('.data-class').innerHTML += "<option>" + data[i].name + "</option>";
+					}
+				});
+			};
+			var getstores = document.querySelector('.input-login-wrapper');
+			getstores.addEventListener('click', getData, false);
+		}
+	}]);
+
+	return Data;
+}();
+
+exports.default = Data;
+},{"./App":19}],15:[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _App = require("./App");
+
+var _App2 = _interopRequireDefault(_App);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Hideauthorization = function () {
+	function Hideauthorization() {
+		_classCallCheck(this, Hideauthorization);
+	}
+
+	_createClass(Hideauthorization, [{
+		key: "render",
+		value: function render() {
+			//var hideForm = function(hide) {
+
+			//document.querySelector('.input-login-wrapper').style.display = 'none';
+			//hide.stopPropagation();
+			//}
+			//var clkBodyLogin = document.querySelector('.input-login-wrapper');
+			//clkBodyLogin.addEventListener('click', hideForm, false);
+			//}
+			//}
+
+
+		}
+	}]);
+
+	return Hideauthorization;
+}();
+
+exports.default = Hideauthorization;
+},{"./App":19}],13:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _App = require('./App');
+
+var _App2 = _interopRequireDefault(_App);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Redirectlogin = function () {
+	function Redirectlogin() {
+		_classCallCheck(this, Redirectlogin);
+	}
+
+	_createClass(Redirectlogin, [{
 		key: 'render',
 		value: function render() {
 			var RedirectSignin = function RedirectSignin() {
 				document.querySelector('.input-login-wrapper').style.display = 'block';
 				document.querySelector('.input-login-wrapper').innerHTML = '\n\t<div class = \'cross\'>x</div>\n\t<h3 class = \'h3\'>Log In</h3>\n\t        <input type = \'text\' value = \'login\' class = \'input-login\'>\n\t\t\t<input type = \'password\' value = \'\' class = \'input-login\'>\n\t\t\t<input type = \'submit\' value = \'Sign In\' class = \'login-sbm\'> \n\t\t\t<p>Have not an account?</p><div class = \'register-redirect\'>Register</div>\n\t';
-				console.log(777);
+				console.log('login redirect');
 
 				//const html = `
 				//<div class = 'cross'>x</div>
@@ -227,11 +467,11 @@ var RedirectLogin = function () {
 		}
 	}]);
 
-	return RedirectLogin;
+	return Redirectlogin;
 }();
 
-exports.default = RedirectLogin;
-},{"./App":10}],14:[function(require,module,exports) {
+exports.default = Redirectlogin;
+},{"./App":19}],14:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -259,7 +499,7 @@ var RedirectRegister = function () {
 			var RedirectSignup = function RedirectSignup() {
 				document.querySelector('.input-login-wrapper').style.display = 'block';
 				document.querySelector('.input-login-wrapper').innerHTML = '\n\t<div class = \'cross\'>x</div>\n\t<h3 class = \'h3\'>Log In</h3>\n\t        <input type = \'text\' value = \'login\' class = \'input-login\'>\n\t\t\t<input type = \'password\' value = \'\' class = \'input-login\'>\n\t\t\t<input type = \'submit\' value = \'Sign In\' class = \'login-sbm\'> \n\t\t\t<p>Have not an account?</p><div class = \'signin-redirect\'>Sign up</div>\n\t';
-				console.log(888);
+				console.log('sign up redirect');
 			};
 
 			var clkLogin = document.querySelector('.signin-redirect');
@@ -271,12 +511,8 @@ var RedirectRegister = function () {
 }();
 
 exports.default = RedirectRegister;
-},{"./App":10}],3:[function(require,module,exports) {
+},{"./App":19}],2:[function(require,module,exports) {
 "use strict";
-
-var _App = require("./App");
-
-var _App2 = _interopRequireDefault(_App);
 
 var _login = require("./login");
 
@@ -285,6 +521,18 @@ var _login2 = _interopRequireDefault(_login);
 var _register = require("./register");
 
 var _register2 = _interopRequireDefault(_register);
+
+var _data = require("./data");
+
+var _data2 = _interopRequireDefault(_data);
+
+var _sdata = require("./sdata");
+
+var _sdata2 = _interopRequireDefault(_sdata);
+
+var _hideform = require("./hideform");
+
+var _hideform2 = _interopRequireDefault(_hideform);
 
 var _signinRedirect = require("./signin-redirect");
 
@@ -296,21 +544,25 @@ var _signupRedirect2 = _interopRequireDefault(_signupRedirect);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import HideAuthorization from "./hideform";
-var app = new _App2.default();
-var log = new _login2.default();
+// const app = new App();
+var log = new _login2.default(); //import App from "./App";
+
 var sign = new _register2.default();
-//const ha = new HideAuthorization();
+var data = new _data2.default();
+var sdata = new _sdata2.default();
+var ha = new _hideform2.default();
 var redlogin = new _signinRedirect2.default();
 var redreg = new _signupRedirect2.default();
 
-app.render();
+// app.render();
 log.render();
 sign.render();
-//ha.render();
+data.render();
+sdata.render();
+ha.render();
 redlogin.render();
 redreg.render();
-},{"./App":10,"./login":11,"./register":12,"./signin-redirect":13,"./signup-redirect":14}],16:[function(require,module,exports) {
+},{"./login":9,"./register":10,"./data":11,"./sdata":12,"./hideform":15,"./signin-redirect":13,"./signup-redirect":14}],21:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -332,7 +584,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = undefined || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49515' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49307' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -433,5 +685,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[16,3])
+},{}]},{},[21,2])
 //# sourceMappingURL=/dist/4b386eec36a6b23e4bb0c5c5119f0a2c.map

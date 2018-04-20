@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({15:[function(require,module,exports) {
+})({20:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -101,7 +101,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],7:[function(require,module,exports) {
+},{}],16:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -132,13 +132,13 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":15}],2:[function(require,module,exports) {
+},{"./bundle-url":20}],3:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"./img\\header-bg.jpg":8,"./img\\bg.png":9,"_css_loader":7}],16:[function(require,module,exports) {
+},{"./img\\header-bg.jpg":17,"./img\\bg.png":18,"_css_loader":16}],21:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -160,7 +160,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = undefined || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49515' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49307' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -261,7 +261,7 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}],18:[function(require,module,exports) {
+},{}],23:[function(require,module,exports) {
 var getBundleURL = require('./bundle-url').getBundleURL;
 
 function loadBundlesLazy(bundles) {
@@ -340,7 +340,7 @@ LazyPromise.prototype.then = function (onSuccess, onError) {
 LazyPromise.prototype.catch = function (onError) {
   return this.promise || (this.promise = new Promise(this.executor).catch(onError));
 };
-},{"./bundle-url":15}],0:[function(require,module,exports) {
-var b=require(18);b.load([["557c90e8c0a27d1b181119aa23db43e5.jpg",8],["8a9a2a589a3af8e5eece07227a4a0aa9.png",9]]);
-},{}]},{},[16,0])
+},{"./bundle-url":20}],0:[function(require,module,exports) {
+var b=require(23);b.load([["557c90e8c0a27d1b181119aa23db43e5.jpg",17],["8a9a2a589a3af8e5eece07227a4a0aa9.png",18]]);
+},{}]},{},[21,0])
 //# sourceMappingURL=/dist/b57df4f8dcf8856bb1f0db9d3c7396f5.map

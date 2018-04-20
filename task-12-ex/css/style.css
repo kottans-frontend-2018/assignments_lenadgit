@@ -209,3 +209,9 @@ border-bottom: 2px solid #8B4513;
 	
 	background: linear-gradient(to bottom, #FFFF00, #8B4513);
 }
+
+.picture-food {
+	position: absolute;
+	top: 240px;
+	left: 50px;
+}

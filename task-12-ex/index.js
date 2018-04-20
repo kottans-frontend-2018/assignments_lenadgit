@@ -1,4 +1,4 @@
-import App from "./App";
+//import App from "./App";
 import Login from "./login";
 import Signin from "./register";
 import Data from "./data";
@@ -12,7 +12,7 @@ import Redirectregister from "./signup-redirect";
 
 
 
-const app = new App();
+// const app = new App();
 const log = new Login();
 const sign = new Signin();
 const data = new Data();
@@ -27,7 +27,7 @@ const redreg = new Redirectregister();
 
 
 
-app.render();
+// app.render();
 log.render();
 sign.render();
 data.render();
