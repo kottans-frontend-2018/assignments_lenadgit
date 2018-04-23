@@ -1,6 +1,6 @@
 import {AUTH_HTTP} from './auth.http'
 import {INGREDIENTS_URL} from './constants'
-
+import {PizzaComponent} from './pizza.component'
 
 	class pizzaDataService() {
 		constructor() {
