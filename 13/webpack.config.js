@@ -1,0 +1,99 @@
+'use strict';
+
+var path = require('path');
+var webpack = require('webpack');
+var autoprefixer = require('autoprefixer');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var styleLintPlugin = require('stylelint-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+var promise = require('es6-promise'); 
+promise.polyfill();
+
+module.exports = {
+  entry: ['babel-polyfill', './src/main.js'],
+
+  output: {
+    path: '../build',
+    filename: 'js/index.js'
+  },
+
+  plugins: [
+    // Specify the resulting CSS filename
+    new ExtractTextPlugin('css/styles.css'),
+    new CopyWebpackPlugin([
+        {
+          from: 'assets',
+          to: 'assets'
+        }
+    ]),
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    })
+  ],
+
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.(scss|sass)$/,
+        loader: ExtractTextPlugin.extract(
+          'style-loader',
+          'css-loader!postcss!sass-loader?outputStyle=expanded'
+        )
+      },
+      // {
+      //   test: /(\.tpl|\.html)$/,
+      //   loader: 'lodash-template-webpack',
+      // },
+      {
+        test: /\.css$/, 
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.(jpe?g|png|svg|ttf|otf|woff2)$/,
+        loader: 'file-loader?name=/assets/[name].[ext]'
+      }
+    ]
+  },
+
+//   devServer: {
+//     proxy: {
+//       '/register': {
+//           target: {
+//               host: "regist_service",
+//               protocol: 'http:',
+//               port: 8000
+//           },
+//           secure: false,
+//       },
+//       '/login':  {
+//           target: {
+//               host: "login_service",
+//               protocol: 'http:',
+//               port: 5000
+//           },
+//           secure: false,
+//       },
+//     }
+//   },
+
+  postcss: [
+    autoprefixer({
+      browsers: ['last 2 versions']
+    })
+  ],
+
+  stats: {
+    // Colored output
+    colors: true
+  },
+
+  // Create Sourcemaps for the bundle
+  devtool: 'source-map'
+};
