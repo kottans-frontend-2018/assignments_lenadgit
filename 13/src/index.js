@@ -8,31 +8,12 @@ import PizzaComponent from "./pizza.component";
 
 
 
+const pizzadata = new PIZZA_DATA();
+const pizzacomp = new PizzaComponent();
 
 
-// const app = new App();
-//const log = new Login();
-//const sign = new Signin();
-//const data = new Data();
-//const sdata = new sData();
-//const ha = new Hideauthorization();
-//const redlogin = new Redirectlogin();
-//const redreg = new Redirectregister();
-
-
-
-
-
-
-
-// app.render();
-//log.render();
-//sign.render();
-//data.render();
-//sdata.render();
-//ha.render();
-//redlogin.render();
-//redreg.render();
+pizzadata.render();
+pizzacomp.render();
 
 
 
