@@ -2,12 +2,12 @@ import {AUTH_HTTP} from './auth.http'
 import {INGREDIENTS_URL} from './constants'
 import {PizzaComponent} from './pizza.component'
 
-		class pizzaDataService() {
+
+	class pizzaDataService() {
 		constructor() {
 			this.ingredients = [];
 			this.tags = [];
-			document.querySelector('.add-btn').addEventListener('click', onInit, false);
-		}
+			}
 			getIngredients() {
 				return AUTH_HTTP.get('INGREDIENTS_URL').then(
 					data => {
