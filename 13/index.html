@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pizza APP</title>
+</head>
+<body>
+	
+<!--	<div id="pizza-app"></div> -->
+
+	<div class = "wrapper">
+		<header class = "header">
+		<div class = "header-inner">
+			<button class = "header-btn">xx xx xx</button>
+			<img src = "assets/logo.png" alt = "logo" class = "logo">
+			<div class = "header-btns">
+			<input type = "button" class = "header-btn auth" value = "Login" id = "login-btn">
+			<input type = "button" class = "header-btn auth" value = "Sign Up" id = "signup-btn">
+			</div>
+			<div class = "input-login-wrapper">
+			<!--<input type = "text" value = "login" class = "input-login">
+			<input type = "password" value = "" class = "input-login">
+			<input type = "submit" value = "Submit" class = "login-sbm"> -->
+			</div>
+			</div>
+		</header>
+
+		<section class = "content-wrapper">
+		<div class = "add-wrapper">
+			<button class = "add-btn">ADD +</button>
+			</div>
+			<br>
+			<div class = "row-wrapper">
+			<canvas id = "canvas" height = "450" width = "450" style="border:3px solid #000000;" class = "canvas-pizza">
+				<p><font color = "#fff">111</font></p>
+			</canvas>
+
+
+<div id ="data-pizza">
+			<input type = "checkbox" name = "sosige" id = "sosidge"> sosidge
+			<input type = "checkbox" name = "cheese" id = "cheese"> cheese
+			<input type = "checkbox" name = "corn" id = "corn"> corn
+
+			</div>
+			<div class = "row-wrapper">
+			<img src = "" id = "food-sosidge" class = "picture-food"> 
+			<img src = "" id = "food-cheese" class = "picture-food"> 
+			<img src = "" id = "food-corn" class = "picture-food">
+			</div>
+</div>			
+		</section>  
+				<script>
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+var rectX = 50;
+var rectY = 50;
+var rectWidth = 350;
+var rectHeight = 350;
+var cornerRadius = 330;
+
+context.lineJoin = "round";
+context.lineWidth = cornerRadius;
+context.fillStyle = 'red';
+context.strokeRect(rectX+(cornerRadius/2), rectY+(cornerRadius/2), rectWidth-cornerRadius, rectHeight-cornerRadius);
+context.fillRect(rectX+(cornerRadius/2), rectY+(cornerRadius/2) );
+
+
+	
+</script>
+<script>
+	var foods = document.getElementById("food-sosidge");
+	var foodch = document.getElementById("food-cheese");
+	var foodco = document.getElementById("food-corn");
+
+
+
+var showSosidge = function() {
+	if(document.getElementById("sosidge").checked == true) {
+		foods.src = "assets/sosidge.png";
+	}
+	else if(document.getElementById("sosidge").checked == false){
+		foods.src = "";
+	}
+}
+var clicks = document.getElementById('sosidge');
+clicks.addEventListener('click', showSosidge, false);
+
+var showCheese = function() {
+	if(document.getElementById("cheese").checked == true) {
+		foodch.src = "assets/cheese.png";
+	}
+	else if(document.getElementById('cheese').checked == false){
+		foodch.src = "";
+	}
+}
+var clickch = document.getElementById('cheese');
+clickch.addEventListener('click', showCheese, false);
+
+var showCorn = function() {
+	if(document.getElementById("corn").checked == true) {
+		foodco.src = "assets/corn.png";
+	}
+	else if(document.getElementById('corn').checked == false){
+		foodco.src = "";
+	}
+}
+var clickco = document.getElementById('corn');
+clickco.addEventListener('click', showCorn, false);
+
+
+	//if(document.getElementById("cheese").checked = true) {
+		//foodch.src = "img/cheese.png";
+	//}
+		//else 	 {
+		//foodch.src = "";
+	//}
+	
+	//if (document.getElementById("corn").checked = true) {
+		//foodco.src = "img/corn.png";
+	//}
+		//else {
+		//foodco.src = "";
+	//}
+</script>
+
+
+		<footer class = "footer"></footer>
+	</div>
+
+</body>
+</html>
